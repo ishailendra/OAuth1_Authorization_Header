@@ -17,17 +17,17 @@ String header = new OAuth1AuthorizationHeaderGenerator().httpMethodType("GET")
             .addConsumerSecret("<Consumer_Secret>")
             .addOAuthToken("<OAuth_Token>")
             .addOAuthTokenSecret("<OAuth_Token_Secret>")
-            ..addParameters("oauth_callback", "secret")
+            .addParameters("oauth_callback", "<Callback_URL>")
             .generate();
 
 HttpHeaders headers = new HttpHeaders();
 headers.add("Authorization", header);
 HttpEntity<String> httpEntity = new HttpEntity<String>(headers);
-ResponseEntity<Object> someModelEntity= template.exchange("<Request_URL>",
+ResponseEntity<Object> someModelEntity= restTemplate.exchange("<Request_URL>",
                     HttpMethod.GET, httpEntity, Object.class);
 ```
 
-Examples header generated = 
+Examples header generated = OAuth oauth_callback="%3CCallback_URL%3E", oauth_consumer_key="%3CConsumer_Key%3E", oauth_nonce="QAn0EFpHUAulnw1", oauth_signature_method="HmacSHA1", oauth_timestamp="1649144568", oauth_token="%3COAuth_Token%3E", oauth_version="1.0", oauth_signature="r3vpRPJSnlOp9Uouw381nA6wu44%3D"
 
 ## Reference
 
